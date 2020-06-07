@@ -20,17 +20,21 @@ class Models{
     return token;
   }
 
-  async valid(username, pass){
+  async valid(user, pass){
     
-    this.get(username).then(data=>{
-      bcrypt.compare(pass, data[0].password).then(results=>{
-        // console.log(valid);
-        
-        return results ? data[0] :Promise.reject('wrong password');
-      });
-
+    try {
+      console.log(user, pass);
+      const result = await this.schema.findOne({ username: user });
+      if (result) {
+        const isValid = await bcrypt.compare(pass, result.password);
+        return isValid ? result : Promise.reject('you should to signup');
+      }
+      return Promise.reject();
+    } catch (error) {
+      return error;
+    }
       
-    });
+
     
   }
 
