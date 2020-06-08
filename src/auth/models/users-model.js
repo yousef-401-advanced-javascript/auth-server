@@ -14,9 +14,9 @@ class Models{
   //   pass = await bcrypt.hash(pass, 5);
   //   return pass;
   // }
-  async token(record){
-    const token =await jwt.sign({ username: record.username }, SECRET);
-    console.log(token);
+  token(record){
+    const token =jwt.sign({ username: record.username }, SECRET);
+    // console.log(token);
     return token;
   }
 
