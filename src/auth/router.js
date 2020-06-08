@@ -2,8 +2,10 @@
 
 const express = require('express');
 const bcrypt = require('bcryptjs');
+
 const basicAuth = require('./middleware/basic');
 const Models = require('./models/users-model');
+const oauthMiddleware = require('./middleware/oauth.js');
 // const hash = require('./models/users-model').schema.hash;
 
 // console.log(Models);
@@ -17,6 +19,8 @@ const router = express.Router();
 router.post('/signup',postSignUpHandler);
 router.post('/signin',basicAuth,postSignInHandler);
 router.get('/users',basicAuth,getAllHandler);
+router.get('/oauth',oauthMiddleware,signIn);
+
 
 
 
@@ -46,5 +50,13 @@ function postSignInHandler(req, res, next){
 
 function getAllHandler(req, res, next){
   Models.get().then(data=>res.json({data}));
+}
+function signIn(req, res, next){
+  res.json({
+    token: req.token ,
+    id:req.id,
+    bio:req.bio,
+    username:req.login,
+  });
 }
 module.exports = router;

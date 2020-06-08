@@ -13,9 +13,10 @@ const app = express();
 //third party modules
 // const error404 = require('./middleware/404');
 // const error500 = require('./middleware/500');
-
+app.use(express.json());
+app.use(express.static('./public'));
 //requring the routes
-const router = require('./auth/router');
+const router = require('./auth/router.js');
 
 
 
