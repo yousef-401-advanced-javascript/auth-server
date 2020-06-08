@@ -23,7 +23,7 @@ class Models{
   async valid(user, pass){
     
     try {
-      console.log(user, pass);
+      // console.log(user, pass);
       const result = await this.schema.findOne({ username: user });
       if (result) {
         const isValid = await bcrypt.compare(pass, result.password);
