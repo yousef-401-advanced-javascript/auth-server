@@ -17,6 +17,8 @@ app.use(express.json());
 app.use(express.static('./public'));
 //requring the routes
 const router = require('./auth/router.js');
+const router2 = require('./auth/extra-routes');
+
 
 
 
@@ -28,6 +30,8 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 app.use('/',router);
+app.use('/',router2);
+
 
 
 

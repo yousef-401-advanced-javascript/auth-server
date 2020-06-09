@@ -16,10 +16,11 @@ module.exports = (req, res, next) => {
     users.valid(user, pass).then((validUser) => {
       // console.log(validUser);
       let token = users.token(validUser);
-      res.cookie('token',token,{maxAge:900000});
-      // req.token = token;
+      res.cookie('token',token,{maxAge:900000})
+        .send(/* ... */);
+      req.token = token;
       next();
     })
-      .catch((err) => next(err));
+      .catch((err) => next(err.message));
   }
 };

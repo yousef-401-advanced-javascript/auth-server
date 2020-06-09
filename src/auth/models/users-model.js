@@ -25,11 +25,12 @@ class Models{
     try {
       // console.log(user, pass);
       const result = await this.schema.findOne({ username: user });
+      console.log(result);
       if (result) {
         const isValid = await bcrypt.compare(pass, result.password);
         return isValid ? result : Promise.reject('you should to signup');
       }
-      return Promise.reject();
+      return Promise.reject('you should to sign up');
     } catch (error) {
       return error;
     }

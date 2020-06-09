@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const basicAuth = require('./middleware/basic');
 const Models = require('./models/users-model');
 const oauthMiddleware = require('./middleware/oauth.js');
-const bearerMiddleware = require('./middleware/bearer');
+// const bearerMiddleware = require('./middleware/bearer');
 
 // const hash = require('./models/users-model').schema.hash;
 
@@ -46,8 +46,8 @@ async function postSignUpHandler(req, res, next) {
 }
 function postSignInHandler(req, res, next){
   // await console.log(req.token);
-  // res.json({token: req.token});
-  res.json({status:'200 you are in'});
+  res.json({token: req.token});
+  // res.json({status:'200 you are in'});
 
 }
 
@@ -63,7 +63,7 @@ function signIn(req, res, next){
   });
 }
 
-router.get('/secret', bearerMiddleware, (req, res) => {
-  res.json(req.user);
-});
+// router.get('/secret', bearerMiddleware, (req, res) => {
+//   res.json(req.user);
+// });
 module.exports = router;

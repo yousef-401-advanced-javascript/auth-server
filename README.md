@@ -7,19 +7,24 @@
 ### Links and Resources
 
 
-<!-- - [class06 PR](https://github.com/yousef-401-advanced-javascript/api-server/pull/4)
-- [swaggerHub URL](https://app.swaggerhub.com/apis/yousef-97/AOS2-allmethods/0.1)
-- [Heroku Deployment](https://api-serverapp.herokuapp.com/api/v1/products)
-- [github Action](https://github.com/yousef-401-advanced-javascript/api-server/actions) -->
+- [class13 PR](https://github.com/yousef-401-advanced-javascript/auth-server/pull/3)
+<!-- - [swaggerHub URL](https://app.swaggerhub.com/apis/yousef-97/AOS2-allmethods/0.1)
+- [Heroku Deployment](https://api-serverapp.herokuapp.com/api/v1/products) -->
+- [github Action](https://github.com/yousef-401-advanced-javascript/auth-server/actions)
 
 ### Documentation
 <!-- [jsdoc](https://api-serverapp.herokuapp.com/docs) -->
 
 ### Modules
-<!-- - `express`
+- `express`
 - `supertest`
 - `mongoose`
-- `morgan` -->
+- `morgan`
+- `base-64`
+- `bcryptjs`
+- `superagent`
+- `jsonwebtoken`
+
 
 
 
@@ -46,7 +51,7 @@
 
 #### UML
 
-<!-- ![second patch](./assest/api-server3.jpg) -->
+![second patch](./assests/auth-uml.jpg)
 
 
 
