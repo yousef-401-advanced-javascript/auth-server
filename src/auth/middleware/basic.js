@@ -8,14 +8,16 @@ const users = require('../models/users-model');
 
 module.exports = (req, res, next) => {
   if (!req.headers.authorization) {
-    next('invalid login');
+    next('invalid header');
   }
   else {
     const basic = req.headers.authorization.split(' ').pop();
     const [user, pass] = base64.decode(basic).split(':');
     users.valid(user, pass).then((validUser) => {
-      console.log(validUser);
-      req.token = users.token(validUser);
+      // console.log(validUser);
+      let token = users.token(validUser);
+      res.cookie('token',token,{maxAge:900000});
+      // req.token = token;
       next();
     })
       .catch((err) => next(err));

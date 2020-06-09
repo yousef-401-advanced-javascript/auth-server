@@ -12,9 +12,10 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
 module.exports = async (req, res, next)=>{
+  console.log(req);
   try{
     const code = req.query.code;
-    console.log('gg');
+    // console.log('gg');
     const remoteToken = await switchingCodeWithToken(code);
     const remoteUser = await getRemoteUserInfo(remoteToken);
     // console.log(remoteUser);
@@ -34,7 +35,7 @@ module.exports = async (req, res, next)=>{
 
 
 async function switchingCodeWithToken(code){
-    console.log(code);
+  // console.log(code);
   const tokenResponse = await superagent.post(tokenServerUrl).send({
     code:code,
     client_id:CLIENT_ID,
@@ -42,7 +43,7 @@ async function switchingCodeWithToken(code){
     redirect_uri:'http://localhost:3000/oauth',
     grant_type:'authorization_code',
   });
-  console.log('okenResponse');
+  // console.log('tokenResponse');
   const access_token = tokenResponse.body.access_token;
   return access_token;
 }
@@ -59,7 +60,7 @@ async function getRemoteUserInfo(token){
 async function getUser(remoteUser){
   const userRecord = {
     username:remoteUser.login,
-    password:'wooooow',
+    password:await users.hash('wooooow'),
   };
   const user = await users.create(userRecord);
   const token = users.token(user);

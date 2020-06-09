@@ -10,12 +10,12 @@ class Models{
   constructor(){
     this.schema = dbModel;
   }
-  // async hash(pass){
-  //   pass = await bcrypt.hash(pass, 5);
-  //   return pass;
-  // }
+  async hash(pass){
+    pass = await bcrypt.hash(pass, 5);
+    return pass;
+  }
   token(record){
-    const token =jwt.sign({ username: record.username }, SECRET);
+    const token =jwt.sign({ username: record.username }, SECRET, {expiresIn:'15min'});
     // console.log(token);
     return token;
   }
@@ -33,8 +33,22 @@ class Models{
     } catch (error) {
       return error;
     }
-      
+    
 
+    
+  }
+  //////////////////===============\\\\\\\\\\\\\\\\\\\
+  async authenticateToken(token){
+    try{
+      const tokenObject = await jwt.verify(token, SECRET);
+      const checkingIfThereIsUser = await this.get(tokenObject.username);
+
+      if(checkingIfThereIsUser){
+        return tokenObject;
+      }else{
+        return 'there is no user';
+      }
+    }catch(err) {return err.message;}
     
   }
 
