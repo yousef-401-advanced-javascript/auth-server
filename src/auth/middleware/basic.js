@@ -16,8 +16,8 @@ module.exports = (req, res, next) => {
     users.valid(user, pass).then((validUser) => {
       // console.log(validUser);
       let token = users.token(validUser);
-      res.cookie('token',token,{maxAge:900000})
-        .send(/* ... */);
+      res.cookie('token',token,{maxAge:900000});
+      // .send('you are there :)');
       req.token = token;
       next();
     })

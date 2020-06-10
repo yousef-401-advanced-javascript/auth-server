@@ -12,6 +12,7 @@ module.exports = (req, res, next)=>{
         .authenticateToken(token)
         .then(validUser=>{
           req.user = validUser;
+          // console.log(req.user.capabilities); //the user name
           next();
         }).catch(e=>next('Invalid login', e.message));
     }else{

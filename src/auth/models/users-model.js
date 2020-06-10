@@ -9,15 +9,36 @@ const SECRET = process.env.SECRET || 'mysecret';
 class Models{
   constructor(){
     this.schema = dbModel;
+    this.role ={
+      'user':['read'],
+      'writer':[ 'read', 'create'],
+      'editor':[ 'read', 'create', 'update'],
+      'admin':[ 'read', 'create', 'update', 'delete'],
+    };
   }
   async hash(pass){
     pass = await bcrypt.hash(pass, 5);
     return pass;
   }
   token(record){
-    const token =jwt.sign({ username: record.username }, SECRET, {expiresIn:'15min'});
+    // console.log(record);
+    // , capabilities: record.role
+    const userData = {username:record.username, capabilities:record.role};
+    const token =jwt.sign(userData, SECRET, {expiresIn:'15min'});
     // console.log(token);
     return token;
+  }
+  async can(capability, role){
+    // console.log(role.capabilities);
+    try {
+      if(this.role[role.capabilities]){
+        return this.role[role.capabilities].includes(capability);    
+      }
+      else false;
+
+    }catch(err){err.message;}
+    
+    
   }
 
   async valid(user, pass){

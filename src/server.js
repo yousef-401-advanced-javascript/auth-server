@@ -15,14 +15,15 @@ const app = express();
 // const error500 = require('./middleware/500');
 app.use(express.json());
 app.use(express.static('./public'));
-//requring the routes
+
+//requiring the routes
 const router = require('./auth/router.js');
 const router2 = require('./auth/extra-routes');
 
 
 
 
-//for jsdocs 
+//for jsdoc 
 // app.use('/docs', express.static('./docs'));
 
 //middle ware 
